@@ -1,0 +1,90 @@
+\documentclass{article} 
+\usepackage{nips15submit_e}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{tabularx}
+%\documentstyle[nips14submit_09,times,art10]{article} % For LaTeX 2.09
+\usepackage{filecontents}
+
+
+
+%%%%%%%%%%%%%%%%%%%Bibliography%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%End Bibliography%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\title{Infinite Latent Feature Models and the Indian Buffet Process}
+
+\author{
+Youyuan Zhang \\
+Department of Statistical Science\\
+Duke University\\
+\texttt{youyuan.zhang@duke.edu} \\
+\And
+Lin Xiao \\
+Department of Statistical Science\\
+Duke University \\
+\texttt{lin.xiao@duke.edu} \\
+}
+
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to \LaTeX{} to determine where to break
+% the lines. Using \AND forces a linebreak at that point. So, if \LaTeX{}
+% puts 3 of 4 authors names on the first line, and the last on the second
+% line, try using \AND instead of \And before the third author name.
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+\nipsfinalcopy 
+
+\begin{document}
+
+\maketitle
+
+
+\begin{abstract}
+By unveiling the latent variables that can generate observed properties of objects is one of the most fundamental issues in unsupervised learning. However, one of the crucial problems of unsupervised learning algorithms is to detect the latent structure. In K-means problem for example, we need to determine the number of clusters. One classic way is by performing model selection, while the other way is to use a Bayesian nonparametric method. One important method of Bayesian nonparametric method is the Indian buffet process (IBP), which is a stochastic process that provides a probability distribution over equivalence classes of binary matrices of bounded rows and potentially infinite columns. In this report, we first implement the Indian buffet process by Gibbs sampling and Metropolis-Hasting algorithm in python. For improvement in efficiency, we perform matrix calculation optimization and utilize JIT, Cython and parallel programming decrease the computation duration. Finally, we use Code Test for checking the validity and effectiveness of our acceleration and optimization. 
+\end{abstract}
+
+
+\section{Introduction}
+
+
+\subsection{Indian Buffet Process}
+\subsection{Infinite Latent Feature Model}
+
+
+
+
+\section{Implementation}
+\subsection{Data structure}
+\subsection{Algorithm for Metropolis Hastings}
+
+\section{Algorithm output}
+
+
+
+
+
+\section{Profiling and Optimization}
+\subsection{Profiling}
+\subsection{Matrix Calculation}
+\subsubsection{Matrix inverse}
+\subsubsection{Matrix multiplication}
+\subsection{Using Jit}
+\subsection{Cythonizing}
+\subsection{High performance computing}
+\subsubsection{CUDA}
+\subsubsection{Multiprocessing}
+\section{Application and comparison}
+\section{Code testing}
+\section{Conclusion}
+\section{Appendix}
+
+\end{document}
