@@ -57,14 +57,48 @@ By unveiling the latent variables that can generate observed properties of objec
 
 
 \subsection{Indian Buffet Process}
+
+Indian restaurants in London offer buffets with an apparently infinite number of dishes. Indian buffet process (IBP) is a distribution over infinite binary matrices, specifying how customers (objects) choose dishes (features).
+
+N customers enter a restaurant one after another. Each customer is exposed to a buffet consisting of infinitely many dishes arranged in a line. The first customer starts at the left of the buffet and takes a serving from each dish, stopping after certain number of dishes which follows a Poisson($\alpha$) distribution. The ith customer moves along the buffet, sampling dishes based on their "popularity". The ith customer takes dish k with probability $\frac{m_k}{i}$, where $m_k$ is the number of previous customers who have sampled that dish. Having reached the end of all previous sampled dishes, the ith customer then tries a Poisson($\frac{\alpha}{i}$) number of new dishes. In conclusion, except the first customer(object), all the following customers(objects)'s choice can be divided into two parts. The first part depends on all the previous information and can be treated as Bernoulli trials, while the second part goes beyond the number of dishes from before and the number of "new dishes" follows a Poisson distribution with a new rate of $\frac{\alpha}{i}$.
+
+We can indicate which customers chose which dishes using a binary matrix Z with N rows and infinitely many columns, where $z_{ik}$ = 1 if the ith customer sampled the kth dish. 
+
 \subsection{Infinite Latent Feature Model}
 
+In our finite model, the $D$-dimensional vector of properties of an object i, $x_i$ is generated from a Gaussian distribution with mean $z_iA$ and covariance matrix $\Sigma X = \sigma^2_X $ I, where $z_i$ is a $K$-dimensional binary vector, and A is a $K$ $\times$ $D$ matrix of weights. In matrix notation, E[X] = ZA. If Z is a feature matrix, this is a form of binary factor analysis. The distribution of X given Z, A, and $\sigma$ X is matrix Gaussian with mean ZA and covariance matrix $\sigma^2_X$ I, where I is the identity matrix. The prior on A is also matrix Gaussian, with mean 0 and covariance matrix $\sigma^2_X$ I. Integrating out A, we have:
+
+\begin{multline}
+P(X|Z,\sigma_X, \sigma_A) = \frac{1}{(2 \pi)^{ND/2} (\sigma_X)^{(N-K)D}(\sigma_A)^{KD}(|Z^TZ+\frac{\sigma_X^2}{\sigma_A^2}I|)^{D/2}}\\exp\{-\frac{1}{2\sigma_X^2}tr(X^T(I-Z(Z^TZ+\frac{\sigma_X^2}{\sigma_A^2}I)^{-1}Z^T)X)\}
+\end{multline}
 
 
 
 \section{Implementation}
 \subsection{Data structure}
+
+\begin{itemize}
+\item Feature binary matrix Z with entry either 0 or 1
+\item Number of new features $K_{new}$ having a Poisson distribution
+\item Parameter $\alpha$: $K_{new}$'s distribution parameter.
+\item $\sigma^2_X$: Covariance of Gaussian Distribution on x
+\item $\sigma^2_A$: Covariance of Gaussian Distribution prior on A
+
+\end{itemize}
+
 \subsection{Algorithm for Metropolis Hastings}
+We will derive the posteriors analytically and update posteriors. And we will run Metropolis Algorithm on $\sigma^2_X$, $\sigma^2_A$, Z, and Gibbs sampling on $K_{new}$, $\alpha$.
+
+
+\subsubsection{Priors}
+
+\subsubsection{Gibbs samplers}
+
+Full conditional posterior for Z is:
+$$P(z_{ik}|X,Z_{-(i,k),},\sigma_X,\sigma_A) \propto  P(X|Z,\sigma_X, \sigma_A) * P(z_{ik}=1|\textbf{z}_{-i,k}) $$
+
+\subsubsection{Metropolois Algorithm}
+
 
 \section{Algorithm output}
 
