@@ -1,0 +1,21 @@
+import time
+X=np.load('data/X_initialized.npy')
+niter = 1500
+N = 100 
+D = 36 
+sigmaX = 1.7
+sigmaA = 0.5
+alpha = 1.0
+maxNew = 4
+BURN_IN=200
+SAMPLE_SIZE= niter-BURN_IN
+np.random.seed(124)
+t0 = time.time()
+chain4_Z, chain4_K, chain4_sigma_A, chain4_sigma_X, chain4_alpha, Z4 = numba_sampler(X, niter, sigmaX, sigmaA, alpha, N, D, maxNew, log_p_origin)
+t4 = time.time()-t0
+np.save("data/chain4/chain4Z", chain4_Z)
+np.save("data/chain4/chain4K",chain4_K)
+np.save("data/chain4/chain4SigmaX", chain4_sigma_X)
+np.save("data/chain4/chain4SigmaA",chain4_sigma_A)
+np.save("data/chain4/chain4Alpha", chain4_alpha) 
+np.save("data/jit_time",t4)
